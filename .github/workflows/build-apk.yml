@@ -24,6 +24,8 @@ jobs:
 
       - name: Configurar Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
 
       - name: Crear clave de depuración
         run: |
@@ -38,9 +40,7 @@ jobs:
             -dname "CN=Android Debug,O=Android,C=US"
 
       - name: Compilar APK
-        run: |
-          chmod +x gradlew
-          ./gradlew --no-daemon assembleDebug
+        run: gradle --no-daemon assembleDebug
 
       - name: Guardar APK
         uses: actions/upload-artifact@v4
